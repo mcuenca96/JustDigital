@@ -1,5 +1,4 @@
-from urllib.request import urlopen
-
+import urllib
 import json
 
 
@@ -13,12 +12,12 @@ class GithubApiClient:
 
     def public_api_call(self, endpoint, parameters):
         url = self.base_url + endpoint + parameters
-        result = urlopen(url).read()
+        result = urllib.urlopen(url).read()
         return json.loads(result)
 
     def private_api_call(self, endpoint, parameters):
         url = self.base_url + endpoint + parameters + \
               "?client_id=" + self.client_id + \
               "&client_secret=" + self.client_secret
-        result = urlopen(url).read()
+        result = urllib.urlopen(url).read()
         return json.loads(result)
